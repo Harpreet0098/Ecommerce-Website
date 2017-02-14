@@ -1,6 +1,6 @@
 <!--Database Connection-->
-<?php require_once("../includes/db_connection.php"); ?>
-<?php require_once("../includes/functions.php"); ?>
+<?php require_once("includes/db_connection.php"); ?>
+<?php require_once("includes/functions.php"); ?>
 <!DOCTYPE html>
 <html>
     <head>
@@ -27,8 +27,16 @@
          </div>
         <ul class="nav navbar-nav">
             <li><a href="index.php">HOME</a></li>
-            <li><a href="#">TRENDING</a></li>
-            <li><a href="#">SALE</a></li>
+            <?php
+                $get_cate = "SELECT * FROM categories";
+                $run_cate = mysqli_query($connection,$get_cate);
+                confirm_query($run_cate);
+                while($row_cate = mysqli_fetch_assoc($run_cate)){
+                    $cate_id = $row_cate['cato_id'];
+                    $cate_title = $row_cate['cato_title'];
+                    echo "<li><a href='index.php?cate=$cate_id'>$cate_title</a></li>";
+                }
+            ?>    
         </ul>
         <ul class="nav navbar-nav navbar-right">
             <li><a href="#">SIGN-IN</a></li>
@@ -78,4 +86,10 @@
         
         <footer></footer>
     </body>
+                <!--5. Disconnect the database-->
+    <?php
+        if(isset($connection)){
+            mysqli_close($connection);
+        }
+     ?>
 </html>

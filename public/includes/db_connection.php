@@ -1,6 +1,6 @@
 <?php
     //1.Create a database connection
-    define("dbhost","localhost:8080");
+    define("dbhost","localhost");
     define("dbuser","root");
     define("dbpass","");
     define("dbname","watch_shop");
@@ -9,9 +9,5 @@
     if(mysqli_connect_errno()){
         die("Database connection failed:" . mysqli_connect_error() . " (" . mysqli_connect_errno() . ")"
         );
-    }
-    //5. Disconnect the database
-    if(isset($connection)){
-    mysqli_close($connection);
     }
 ?>
